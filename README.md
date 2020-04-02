@@ -126,3 +126,10 @@ Join the community!
 - [Discord](https://discord.gg/jFjbXqp)
 - [Forkwell Facebook Group](https://facebook.com/groups/forkwellcoronavirushack/)
 
+## Team 
+Group name: 404<br/>
+- Looi Yao Wei<br/>
+- Ng Jia Qi<br/>
+- Tan See Jou<br/>
+- Ong Jia Eek<br/>
+
