@@ -142,5 +142,46 @@ function initMap() {
     ]
 
   });
+  hLocate()
+
+}
+
+function setMarker(name, hLat, hLong){
+
+  var marker = new google.maps.Marker({
+
+    position: {lat: hLat, lng: hLong},
+    map: map,
+    title: name
+
+  });
+
+
+}
+
+function hLocate(){
+
+  var request = new XMLHttpRequest()
+
+  request.open("GET", "https://api.coronatracker.com/v1/healthcare-institution", true)
+
+  request.onload = function(){
+
+    var data = JSON.parse(this.response)
+
+    for(var i = 0; i < data.hospitalsAndHealthcareProviders.length; i++){
+
+      if(data.hospitalsAndHealthcareProviders[i].country == "MY"){
+
+        setMarker(data.hospitalsAndHealthcareProviders[i].name,
+                  parseFloat(data.hospitalsAndHealthcareProviders[i].lat),
+                  parseFloat(data.hospitalsAndHealthcareProviders[i].long));
+      }
+
+    }
+
+  }
+
+  request.send()
 
 }
