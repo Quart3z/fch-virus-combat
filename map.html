@@ -2,16 +2,32 @@
 <html>
 
   <head>
-    <title>Simple Map</title>
+    <title>Tracker</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="map.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtUfOMipXHfE-B0PuzArf_QThC5H4rHZE&callback=initMap"async defer></script>
   </head>
 
   <body>
-    <div id="map"></div>
+
+      <div id="container">
+
+        <div id="map"></div>
+
+        <div id="sidebar">
+
+          <form id="search" action="">
+            <input id="search_field" type="text" placeholder="Search"></input>
+            <button id="search_btn" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+
+        </div>
+
+      </div>
+
   </body>
-  
+
 </html>

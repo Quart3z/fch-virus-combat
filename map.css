@@ -1,4 +1,4 @@
-html, body {
+html, body{
 
   height: 100%;
   margin: 0;
@@ -6,8 +6,56 @@ html, body {
 
 }
 
-#map {
+#container{
 
+  display: flex;
   height: 100%;
-  
+
+}
+
+#map{
+
+  width: 75%;
+  height: 100%;
+
+}
+
+#sidebar{
+
+  display: flex;
+  width: 25%;
+  justify-content: center;
+
+}
+
+#search{
+
+  display: flex;
+  margin-top: 5%;
+  width: 100%;
+  height: 6%;
+  justify-content: center;
+
+}
+
+#search_field{
+
+  float: left;
+  width: 70%;
+  padding: 0 10px 0 10px;
+
+}
+
+#search_field:focus{
+
+  outline: none;
+
+}
+
+#search_btn{
+
+  padding: 10px;
+  width: 11%;
+  color: gray;
+
 }
