@@ -146,13 +146,42 @@ function initMap() {
 
 }
 
-function setMarker(name, hLat, hLong){
+function setMarker(location, tag){
 
-  var marker = new google.maps.Marker({
+  //Custom markersbase
+  var hospital = {
 
-    position: {lat: hLat, lng: hLong},
-    map: map,
-    title: name
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 5,
+    fillColor: "steelblue",
+    fillOpacity: 1.0,
+    strokeOpacity: 0.0
+
+  }
+
+  var uReport = {
+
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 5,
+    fillColor: "crimson",
+    fillOpacity: 1.0,
+    strokeOpacity: 0.0
+
+  }
+
+  if(tag == "hospital"){
+
+    var marker = new google.maps.Marker({
+
+      position: {lat: parseFloat(location.lat), lng: parseFloat(location.long)},
+      map: map,
+      icon: hospital
+
+    });
+
+  }
+
+  google.maps.event.addListener(marker, 'click', function() {
 
   });
 
@@ -173,9 +202,8 @@ function hLocate(){
 
       if(data.hospitalsAndHealthcareProviders[i].country == "MY"){
 
-        setMarker(data.hospitalsAndHealthcareProviders[i].name,
-                  parseFloat(data.hospitalsAndHealthcareProviders[i].lat),
-                  parseFloat(data.hospitalsAndHealthcareProviders[i].long));
+        setMarker(data.hospitalsAndHealthcareProviders[i], "hospital");
+
       }
 
     }

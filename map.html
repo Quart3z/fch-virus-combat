@@ -7,7 +7,11 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
     <script src="map.js"></script>
+    <script src="database.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtUfOMipXHfE-B0PuzArf_QThC5H4rHZE&callback=initMap"async defer></script>
   </head>
 
@@ -23,6 +27,31 @@
             <input id="search_field" type="text" placeholder="Search"></input>
             <button id="search_btn" type="submit"><i class="fa fa-search"></i></button>
           </form>
+
+          <div id="info">23</div>
+
+          <div id="report_panel">
+
+            <p>User reports will be listed as unconfirmed cases,
+               further investigation/verification will be undergone before being lablled as possible cases.
+               Report is not gurantee to be legit</p>
+
+            <br>   
+
+            <form>
+              <!--here add the marker, refer to Google Map Api documnetation-->
+              <textarea></textarea>
+              <br>
+              <button type="submit">Submit</button>
+            </form>
+
+
+
+          </div>
+
+          <div id=booter>
+            <button id="report_btn" onclick="report()">Report for new cases    <i class="fa fa-bullhorn"></i></button>
+          </div>
 
         </div>
 
