@@ -133,3 +133,7 @@ Group name: 404<br/>
 - Tan See Jou<br/>
 - Ong Jia Eek<br/>
 
+## Log Book
+3/4 - Template created(Looi) <br/>
+4/4 - Markers added, sidebar added(Looi) 
+
