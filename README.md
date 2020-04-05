@@ -135,5 +135,6 @@ Group name: 404<br/>
 
 ## Log Book
 3/4 - Template created(Looi) <br/>
-4/4 - Markers added, sidebar added(Looi) 
+4/4 - Markers added, sidebar added(Looi) <br/>
+5/4 - Markers changes, report system added{not complete}(Looi) <br/>
 
