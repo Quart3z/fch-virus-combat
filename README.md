@@ -137,4 +137,5 @@ Group name: 404<br/>
 3/4 - Template created(Looi) <br/>
 4/4 - Markers added, sidebar added(Looi) <br/>
 5/4 - Markers changes, report system added{not complete}(Looi) <br/>
+8/4 - GPS added (Looi) <br/>
 
