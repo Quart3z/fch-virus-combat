@@ -23,12 +23,7 @@
 
         <div id="sidebar">
 
-          <form id="search" action="">
-            <input id="search_field" type="text" placeholder="Search"></input>
-            <button id="search_btn" type="submit"><i class="fa fa-search"></i></button>
-          </form>
-
-          <div id="info">23</div>
+          <div id="info"></div>
 
           <div id="report_panel">
 
@@ -36,13 +31,16 @@
                further investigation/verification will be undergone before being lablled as possible cases.
                Report is not gurantee to be legit</p>
 
-            <br>   
+            <br>
 
             <form>
               <!--here add the marker, refer to Google Map Api documnetation-->
               <textarea></textarea>
               <br>
-              <button type="submit">Submit</button>
+              <div>
+                <button onclick="cancel_report()">Cancel</button>
+                <button type="submit">Submit</button>
+              </div>
             </form>
 
 

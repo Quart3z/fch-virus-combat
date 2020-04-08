@@ -2,6 +2,72 @@ var map;
 
 var centerLocation = {lat: 4.2105, lng: 101.9758}
 
+var currLocation = [];
+var currCircle = [];
+
+function geoLocate(controlDiv, map, center){
+
+  var control = this;
+
+  // Set the center property upon construction
+  control.center_ = center;
+  controlDiv.style.clear = 'both';
+  controlDiv.style.width = '40px';
+  controlDiv.style.margin = '10px';
+
+  // Set CSS for border
+  var geoLocateUI = document.createElement('div');
+  geoLocateUI.style.backgroundColor = '#fff';
+  geoLocateUI.style.padding = '0px';
+  geoLocateUI.style.border = '2px solid #fff';
+  geoLocateUI.style.borderRadius  = '2px';
+  geoLocateUI.style.boxShadow  = 'rgba(0, 0, 0, 0.3) 0px 1px 4px -1px';
+  geoLocateUI.style.cursor = 'pointer';
+  geoLocateUI.style.textAlign = 'center';
+  geoLocateUI.id = 'geoLocateUI';
+  geoLocateUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(geoLocateUI);
+
+  // Set CSS for interior
+  var geoLocateText = document.createElement('div');
+  geoLocateText.style.color = 'rgb(25,25,25)';
+  geoLocateText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  geoLocateText.style.fontSize = '16px';
+  geoLocateText.style.lineHeight = '38px';
+  geoLocateText.style.paddingLeft = '5px';
+  geoLocateText.style.paddingRight = '5px';
+  geoLocateText.id = 'geoLocateText';
+  geoLocateText.innerHTML = '<i class="fa fa-map-marker"></i>';
+  geoLocateUI.appendChild(geoLocateText);
+
+  // Set up the click event listener for 'Center Map': Set the center of
+  // the map
+  // to the current center of the control.
+  geoLocateUI.addEventListener('click', function() {
+
+    if (navigator.geolocation) {
+
+      navigator.geolocation.getCurrentPosition(function(position) {
+
+        var current = {
+
+          lat: position.coords.latitude,
+          long: position.coords.longitude
+
+        }
+
+        setMarker(current, "current");
+        map.setZoom(13);
+        map.setCenter(new google.maps.LatLng(current.lat, current.long));
+
+      });
+
+    }
+
+  });
+
+}
+
 function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -142,18 +208,41 @@ function initMap() {
     ]
 
   });
-  hLocate()
+
+  // Create the DIV to hold the control and call the CenterControl()
+  // constructor
+  // passing in this DIV.
+  var geoLocateDiv = document.createElement('div');
+  var centerControl = new geoLocate(geoLocateDiv, map, centerLocation);
+
+  geoLocateDiv.index = 1;
+  geoLocateDiv.style['padding-top'] = '10px';
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(geoLocateDiv);
+
+  locate()
 
 }
 
 function setMarker(location, tag){
 
   //Custom markersbase
+  var current= {
+
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 5,
+    fillColor: "#51b882",
+    fillOpacity: 0.7,
+    strokeOpacity: 1.0,
+    strokeWeight: 1,
+    strokeColor: '#92d6b2'
+
+  }
+
   var hospital = {
 
     path: google.maps.SymbolPath.CIRCLE,
     scale: 5,
-    fillColor: "steelblue",
+    fillColor: "#5b78bd",
     fillOpacity: 1.0,
     strokeOpacity: 0.0
 
@@ -169,26 +258,65 @@ function setMarker(location, tag){
 
   }
 
-  if(tag == "hospital"){
+  switch (tag) {
 
-    var marker = new google.maps.Marker({
+    case "hospital":
 
-      position: {lat: parseFloat(location.lat), lng: parseFloat(location.long)},
-      map: map,
-      icon: hospital
+      var marker = new google.maps.Marker({
 
-    });
+        position: {lat: parseFloat(location.lat), lng: parseFloat(location.long)},
+        icon: hospital
+
+      });
+
+      marker.setMap(map);
+
+    break;
+
+    case "current":
+
+      var marker;
+
+      if(currLocation.length && currCircle.length != 0){
+
+        currLocation[0].setMap(null);
+        currCircle[0].setMap(null);
+        currLocation = [];
+        currCircle = [];
+
+      }
+
+      marker = new google.maps.Marker({
+
+        position: {lat: parseFloat(location.lat), lng: parseFloat(location.long)},
+        map: map,
+        icon: current
+
+      });
+
+      currLocation.push(marker);
+
+      var circleRange = new google.maps.Circle({
+
+            strokeOpacity: 0.0,
+            strokeWeight: 2,
+            fillColor: '#aff0ce',
+            fillOpacity: 0.35,
+            map: map,
+            center: {lat: parseFloat(location.lat), lng: parseFloat(location.long)},
+            radius: 10000
+
+      });
+
+      currCircle.push(circleRange)
+
+    break;
 
   }
 
-  google.maps.event.addListener(marker, 'click', function() {
-
-  });
-
-
 }
 
-function hLocate(){
+function locate(){
 
   var request = new XMLHttpRequest()
 
@@ -211,5 +339,12 @@ function hLocate(){
   }
 
   request.send()
+
+}
+
+function searchPlace(){
+
+  var searchItem = document.getElementById('search_field').value;
+
 
 }
